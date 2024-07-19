@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Interface</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Search Platform</h1>
+    </header>
+    <main>
+        <div class="search-container">
+            <input type="text" id="query" placeholder="Search...">
+            <select id="search_type">
+                <option value="tensor">Tensor</option>
+                <option value="lexical">Lexical</option>
+                <option value="hybrid">Hybrid</option>
+            </select>
+            <select id="retrieval_method">
+                <option value="">None</option>
+                <option value="lexical">Lexical</option>
+                <option value="tensor">Tensor</option>
+                <option value="disjunction">Disjunction</option>
+            </select>
+            <select id="ranking_method">
+                <option value="">None</option>
+                <option value="lexical">Lexical</option>
+                <option value="tensor">Tensor</option>
+                <option value="rrf">RRF</option>
+            </select>
+            <select id="order_by">
+                <option value="">None</option>
+                <option value="average_rating">Average Rating</option>
+                <option value="rating_number">Rating Number</option>
+                <option value="price">Price</option>
+            </select>
+            <input type="number" id="alpha" placeholder="Alpha" step="0.1" value="0.5">
+            <button id="search-btn">Search</button>
+        </div>
+        <div id="results"></div>
+    </main>
+    <script src="static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+marqo
+tqdm
+python-dotenv
+flask
+flask-cors
