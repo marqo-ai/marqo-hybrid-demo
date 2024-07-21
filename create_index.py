@@ -19,7 +19,9 @@ def main():
     indexes = mq.get_indexes()
     for index in indexes["results"]:
         if index["indexName"] == INDEX_NAME:
-            choice = input(f"Index {INDEX_NAME} already exists. Do you want to delete it? (y/n): ")
+            choice = input(
+                f"Index {INDEX_NAME} already exists. Do you want to delete it? (y/n): "
+            )
             while choice not in ["y", "n"]:
                 choice = input("Please enter 'y' or 'n': ")
             if choice == "y":
@@ -36,7 +38,7 @@ def main():
         "vectorNumericType": VECTOR_NUMERIC_TYPE,
         "annParameters": {
             "spaceType": "prenormalized-angular",
-            "parameters": {"efConstruction": 512, "m": 16}
+            "parameters": {"efConstruction": 512, "m": 16},
         },
         "allFields": [
             {"name": "main_category", "type": "text", "features": ["filter"]},

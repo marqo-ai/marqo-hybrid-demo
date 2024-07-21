@@ -8,38 +8,51 @@
 </head>
 <body>
     <header>
-        <h1>Search Platform</h1>
+        <h1>E-commerce Search</h1>
     </header>
     <main>
-        <div class="search-container">
-            <input type="text" id="query" placeholder="Search...">
+        <div class="sidebar">
+            <h2>Search Configuration</h2>
+            <div>Search Method:</div>
             <select id="search_type">
-                <option value="tensor">Tensor</option>
-                <option value="lexical">Lexical</option>
                 <option value="hybrid">Hybrid</option>
-            </select>
-            <select id="retrieval_method">
-                <option value="">None</option>
-                <option value="lexical">Lexical</option>
                 <option value="tensor">Tensor</option>
-                <option value="disjunction">Disjunction</option>
-            </select>
-            <select id="ranking_method">
-                <option value="">None</option>
                 <option value="lexical">Lexical</option>
-                <option value="tensor">Tensor</option>
-                <option value="rrf">RRF</option>
             </select>
+            <div id="hybrid-options">
+                <div>Retrieval Method:</div>
+                <select id="retrieval_method">
+                    <option value="disjunction">Disjunction</option>
+                    <option value="lexical">Lexical</option>
+                    <option value="tensor">Tensor</option>
+                </select>
+                <div>Ranking Method:</div>
+                <div id="ranking_method">
+                    <p>RRF</p>
+                </div>
+                <div>Alpha:</div>
+                <input type="number" id="alpha" placeholder="Alpha" step="0.1" value="0.5">
+            </div>
+            <div>Order by:</div>
             <select id="order_by">
                 <option value="">None</option>
-                <option value="average_rating">Average Rating</option>
-                <option value="rating_number">Rating Number</option>
-                <option value="price">Price</option>
+                <option value="asc_average_rating">↑ Average Rating</option>
+                <option value="desc_average_rating">↓ Average Rating</option>
+                <option value="asc_rating_number">↑ Rating Number</option>
+                <option value="desc_rating_number">↓ Rating Number</option>
+                <option value="asc_price">↑ Price</option>
+                <option value="desc_price">↓ Price</option>
             </select>
-            <input type="number" id="alpha" placeholder="Alpha" step="0.1" value="0.5">
-            <button id="search-btn">Search</button>
         </div>
-        <div id="results"></div>
+        <div class="content">
+            <div class="search-bar">
+                <input type="text" id="query" placeholder="Search...">
+                <button id="search-btn">Search</button>
+                <div id="loading" class="loading"></div>
+            </div>
+            <div id="search-time"></div>
+            <div id="results" class="results-grid"></div>
+        </div>
     </main>
     <script src="static/script.js"></script>
 </body>
