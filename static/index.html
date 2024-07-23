@@ -27,7 +27,7 @@
                     <option value="tensor">Tensor</option>
                 </select>
                 <div>Ranking Method:</div>
-                <div id="ranking_method">
+                <div id="ranking_method" class="ranking-method">
                     <p>RRF</p>
                 </div>
                 <div>Alpha:</div>
@@ -43,8 +43,13 @@
                 <option value="asc_price">↑ Price</option>
                 <option value="desc_price">↓ Price</option>
             </select>
+            <div class="sponsored-search-toggle">
+                <label for="toggle-sponsored">Show Sponsored Results:</label>
+                <input type="checkbox" id="toggle-sponsored">
+            </div>
         </div>
         <div class="content">
+            <div id="total-documents"></div>
             <div class="search-bar">
                 <input type="text" id="query" placeholder="Search...">
                 <button id="search-btn">Search</button>
@@ -57,3 +62,4 @@
     <script src="static/script.js"></script>
 </body>
 </html>
+

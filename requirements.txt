@@ -1,5 +1,6 @@
-marqo
-tqdm
-python-dotenv
-flask
-flask-cors
+Flask==3.0.3
+Flask_Cors==4.0.1
+marqo==3.7.0
+python-dotenv==1.0.1
+tqdm==4.66.4
+workercontext==0.1.1

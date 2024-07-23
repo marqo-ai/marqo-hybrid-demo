@@ -135,7 +135,7 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
@@ -147,4 +147,24 @@ main {
 
 .hidden {
     display: none;
+}
+
+.ranking-method p {
+    font-size: small;
+}
+
+.sponsored-badge {
+    display: inline-block;
+    padding: 0.2em 0.5em;
+    background-color: #ffd700;
+    color: #000;
+    font-size: 0.8em;
+    margin-top: 0.5em;
+    border-radius: 5px;
+}
+
+.sponsored-search-toggle {
+    font-size: small;
+    display: flex;
+    flex-direction: row;
 }

@@ -8,7 +8,7 @@ MARQO_API_URL = os.getenv("MARQO_API_URL", "http://localhost:8882")
 MARQO_API_KEY = os.getenv("MARQO_API_KEY", None)
 INDEX_NAME = os.getenv("INDEX_NAME", "amazon-example")
 
-MODEL = "open_clip/ViT-B-16-SigLIP-384/webli"
+MODEL = "open_clip/ViT-B-16-quickgelu/metaclip_fullcc"
 VECTOR_NUMERIC_TYPE = "bfloat16"
 
 
@@ -57,6 +57,8 @@ def main():
                 "type": "multimodal_combination",
                 "dependentFields": {"product_image": 0.9, "title": 0.1},
             },
+            {"name": "sponsored", "type": "bool", "features": ["filter"]},
+            {"name": "bid_amount", "type": "float", "features": ["filter", "score_modifier"]},
         ],
         "tensorFields": ["multimodal_image_title"],
     }
