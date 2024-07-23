@@ -18,7 +18,8 @@ We made a cleaned dataset ready to go which you can use to get started quickly. 
 
 Download the dataset:
 ```bash
-
+mkdir data
+wget https://marqo-public-demo-data.s3.amazonaws.com/amazon_products.jsonl -o data/amazon_products.jsonl
 ```
 
 ## Create your own dataset (optional)
@@ -60,7 +61,7 @@ Once indexing is running you can start searching right away, though it may be sl
 
 To run the UI and start interacting with the search engine, run the following command:
 ```bash
-python 4.\ search.py
+python app.py
 ```
 
 # Step 5: Incorporate Sponsored Products
@@ -69,7 +70,7 @@ To incorporate a demo of sponsored search into the UI we provide a script to ran
 
 To randomly sponsor products, run the following command:
 ```bash
-python 5.\ sponsor_products.py
+python 4.\ 4. randomly_sponsor_items.py
 ```
 
 This script uses the partial update API in Marqo to update the sponsored products in real-time without touching the HNSW index.

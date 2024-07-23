@@ -26,12 +26,14 @@ CLIENT_BATCH_SIZE = 32
 N_PROCESSES = 6
 SPONSOR_RATE = 0.05
 
+
 def load_logs(log_file: str) -> set:
     if not os.path.exists(log_file):
         return set()
 
     with open(log_file, "r") as f:
         return set(f.read().splitlines())
+
 
 def log_sponsored_docs(response: dict, log_file: str, lock: Lock):
     with lock:
@@ -44,13 +46,15 @@ def log_sponsored_docs(response: dict, log_file: str, lock: Lock):
 def update_batch(batch: List[str], sponsored: bool = False):
     lock = Lock()
     response = MQ.index(INDEX_NAME).update_documents(
-        [{"_id": _id, "sponsored": sponsored, "bid_amount": random.random()} for _id in batch],
+        [
+            {"_id": _id, "sponsored": sponsored, "bid_amount": random.random()}
+            for _id in batch
+        ],
     )
     if sponsored:
         log_sponsored_docs(response, SPONSOR_LOG_FILE, lock)
     if response["errors"]:
         print(response)
-
 
 
 def main():

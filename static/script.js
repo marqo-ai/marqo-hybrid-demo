@@ -1,17 +1,17 @@
-// /**
-//  * @typedef {Object} SearchResult
-//  * @property {string} _id
-//  * @property {string} main_category
-//  * @property {string} title
-//  * @property {string} store
-//  * @property {Array<string>} features
-//  * @property {number} average_rating
-//  * @property {number} rating_number
-//  * @property {number} price
-//  * @property {string} details
-//  * @property {string} product_image
-//  * @property {number} _score
-//  */
+/**
+ * @typedef {Object} SearchResult
+ * @property {string} _id
+ * @property {string} main_category
+ * @property {string} title
+ * @property {string} store
+ * @property {Array<string>} features
+ * @property {number} average_rating
+ * @property {number} rating_number
+ * @property {number} price
+ * @property {string} details
+ * @property {string} product_image
+ * @property {number} _score
+ */
 
 // document.getElementById('search-btn').addEventListener('click', performSearch);
 // document.getElementById('query').addEventListener('keydown', (event) => {
@@ -31,26 +31,26 @@
 // });
 
 
-// /**
-//  * Validate inputs and make changes to selector status as needed
-//  * @param {string} retrievalMethod 
-//  */
-// function validateSelectors(retrievalMethod) {
-//     const rankingMethodSelector = document.getElementById('ranking_method');
-//     if (retrievalMethod === 'disjunction') {
-//         rankingMethodSelector.innerHTML = `<p>RRF</p>`;
-//     } else if (retrievalMethod === 'lexical') {
-//         rankingMethodSelector.innerHTML = `<p>Tensor</p>`;
-//     } else if (retrievalMethod === 'tensor') {
-//         rankingMethodSelector.innerHTML = `<p>Lexical</p>`;
-//     } 
-// }
+/**
+ * Validate inputs and make changes to selector status as needed
+ * @param {string} retrievalMethod 
+ */
+function validateSelectors(retrievalMethod) {
+    const rankingMethodSelector = document.getElementById('ranking_method');
+    if (retrievalMethod === 'disjunction') {
+        rankingMethodSelector.innerHTML = `<p>RRF</p>`;
+    } else if (retrievalMethod === 'lexical') {
+        rankingMethodSelector.innerHTML = `<p>Tensor</p>`;
+    } else if (retrievalMethod === 'tensor') {
+        rankingMethodSelector.innerHTML = `<p>Lexical</p>`;
+    }
+}
 
 
-// document.getElementById('retrieval_method').addEventListener('change', () => {
-//     const retrievalMethod = document.getElementById('retrieval_method').value;
-//     validateSelectors(retrievalMethod);
-// });
+document.getElementById('retrieval_method').addEventListener('change', () => {
+    const retrievalMethod = document.getElementById('retrieval_method').value;
+    validateSelectors(retrievalMethod);
+});
 
 // async function getNumberOfDocuments() {
 //     const response = await fetch('/number_of_documents', {
@@ -120,7 +120,6 @@
 //     });
 // }
 
-
 document.getElementById('search-btn').addEventListener('click', performSearch);
 document.getElementById('query').addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
@@ -142,9 +141,25 @@ document.getElementById('toggle-sponsored').addEventListener('change', () => {
     performSearch();
 });
 
+document.getElementById('search_type').addEventListener('change', () => {
+    performSearch();
+});
+
+document.getElementById('retrieval_method').addEventListener('change', () => {
+    performSearch();
+});
+
+document.getElementById('alpha').addEventListener('change', () => {
+    performSearch();
+});
+
+document.getElementById('order_by').addEventListener('change', () => {
+    performSearch();
+});
+
 async function getNumberOfDocuments() {
     const response = await fetch('/number_of_documents', {
-        method: 'GET', 
+        method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     });
     const data = await response.json();

@@ -18,7 +18,9 @@ class AmazonDocumentLoader:
     def _format_for_marqo(self, document: dict) -> dict:
         marqo_document = {
             "_id": document["parent_asin"],
-            "main_category": document["main_category"] if document["main_category"] else "",
+            "main_category": document["main_category"]
+            if document["main_category"]
+            else "",
             "title": document["title"],
             "store": document["store"] if document["store"] else "",
             "features": document["features"],

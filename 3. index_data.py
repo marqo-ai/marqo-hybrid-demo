@@ -19,9 +19,10 @@ INDEX_NAME = os.getenv("INDEX_NAME", "amazon-example")
 MQ = marqo.Client(MARQO_API_URL, api_key=MARQO_API_KEY)
 
 INDEX_LOG_FILE = f"{INDEX_NAME}_indexed_docs.log"
-DISK_STREAM_BATCH_SIZE = 2056
-CLIENT_BATCH_SIZE = 64
-N_PROCESSES = 6
+DISK_STREAM_BATCH_SIZE = 512
+CLIENT_BATCH_SIZE = 32
+N_PROCESSES = 8
+
 
 def load_indexed_docs(log_file: str) -> set:
     if not os.path.exists(log_file):
@@ -29,6 +30,7 @@ def load_indexed_docs(log_file: str) -> set:
 
     with open(log_file, "r") as f:
         return set(f.read().splitlines())
+
 
 def log_indexed_docs(response: dict, log_file: str, lock: Lock):
     with lock:

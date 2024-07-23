@@ -6,6 +6,7 @@ RETRIEVAL_METHOD_TO_RANK = {
     "disjunction": "rrf",
 }
 
+
 def get_modifiers(
     order_by: Literal[
         None,
@@ -40,6 +41,7 @@ def parse_body(data: dict):
     )
 
     ranking_method = RETRIEVAL_METHOD_TO_RANK[retrieval_method]
+
     lexical_searchable_attributes: Union[
         None,
         List[
@@ -48,9 +50,13 @@ def parse_body(data: dict):
             ]
         ],
     ] = data.get("lexical_searchable_attributes")
+
     order_by: Literal[None, "average_rating", "rating_number", "price"] = data.get(
         "order_by"
     )
+
+    modifiers = get_modifiers(order_by)
+
     alpha: float = data.get("alpha", 0.5)
 
     searchable_attributes = None
@@ -67,5 +73,9 @@ def parse_body(data: dict):
         if ranking_method == "rrf":
             hybrid_parameters["alpha"] = alpha
             hybrid_parameters["rrfK"] = 60
-    
-    return query, search_type, order_by, hybrid_parameters
+
+        if modifiers is not None:
+            hybrid_parameters["scoreModifiersTensor"] = modifiers
+            hybrid_parameters["scoreModifiersLexical"] = modifiers
+
+    return query, search_type, modifiers, hybrid_parameters

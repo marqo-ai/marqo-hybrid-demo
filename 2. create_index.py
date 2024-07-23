@@ -58,7 +58,11 @@ def main():
                 "dependentFields": {"product_image": 0.9, "title": 0.1},
             },
             {"name": "sponsored", "type": "bool", "features": ["filter"]},
-            {"name": "bid_amount", "type": "float", "features": ["filter", "score_modifier"]},
+            {
+                "name": "bid_amount",
+                "type": "float",
+                "features": ["filter", "score_modifier"],
+            },
         ],
         "tensorFields": ["multimodal_image_title"],
     }
