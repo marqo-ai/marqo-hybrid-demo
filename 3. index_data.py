@@ -5,6 +5,7 @@ from tqdm import tqdm
 from workercontext import parallelise
 from utils.document_loader import AmazonDocumentLoader
 from threading import Lock
+import argparse
 
 from typing import List
 
@@ -20,8 +21,8 @@ MQ = marqo.Client(MARQO_API_URL, api_key=MARQO_API_KEY)
 
 INDEX_LOG_FILE = f"{INDEX_NAME}_indexed_docs.log"
 DISK_STREAM_BATCH_SIZE = 512
-CLIENT_BATCH_SIZE = 32
-N_PROCESSES = 8
+CLIENT_BATCH_SIZE = 16
+N_PROCESSES = 1
 
 
 def load_indexed_docs(log_file: str) -> set:
@@ -53,6 +54,20 @@ def index_batch(batch: List[dict]):
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        prog='3. Index_data',
+        description='Indexes amazon products data into Marqo'
+    )
+    parser.add_argument('--device', type=str, default='cpu', help='Device that is avaliable to Marqo')
+
+    args = parser.parse_args()
+
+    if args.device == 'gpu':
+        global CLIENT_BATCH_SIZE
+        CLIENT_BATCH_SIZE = 32
+        global N_PROCESSES
+        N_PROCESSES = 6
+
     data_path = os.path.join("data", "amazon_products.jsonl")
     data_loader = AmazonDocumentLoader(data_path)
 

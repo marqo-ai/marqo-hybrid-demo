@@ -41,7 +41,6 @@ def number_of_documents():
 def search():
     data = flask.request.json
     query, search_type, modifiers, hybrid_parameters = parse_body(data)
-    print(query, search_type, hybrid_parameters)
 
     results = MQ.index(INDEX_NAME).search(
         q=query,
@@ -60,7 +59,7 @@ def sponsored_search():
     spots = data["auctionSpots"]
 
     query, search_type, _, hybrid_parameters = parse_body(data)
-    print(query, search_type, hybrid_parameters)
+
     results = MQ.index(INDEX_NAME).search(
         q=query,
         search_method=search_type,

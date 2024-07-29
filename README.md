@@ -50,10 +50,17 @@ In this index we use the `bfloat16` data type to save on space, this comes at a 
 
 We highly recommend using a machine with a GPU for indexing, CPU will be very slow. You can either use [Marqo Cloud](https://cloud.marqo.ai), a local GPU, or a cloud machine (e.g. a `g4dn.xlarge` instance on AWS).
 
-To run indexing you can use the following command:
+To run indexing you can use the following command, if you have a GPU you can use the `--device "gpu"` flag to parallelize the indexing process:
 ```bash
-python 3.\ index_data.py
+python 3.\ index_data.py --device "cpu"
 ```
+
+If you see the script printing out errors like the following:
+```
+'error': "Could not find image found at `https://m.media-amazon.com/images/I/31x9M1zwKoL._AC_.jpg`. \nReason: Marqo encountered an error when downloading the image url https://m.media-amazon.com/images/I/31x9M1zwKoL._AC_.jpg. The original error is: (28, 'Operation timed out after 3000 milliseconds with 0 bytes received')"
+```
+
+This is expected as the data contains numerous broken image links. You can ignore these errors as they will not affect the indexing process.
 
 # Step 4: Search
 

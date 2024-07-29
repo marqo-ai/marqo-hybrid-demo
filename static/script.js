@@ -40,6 +40,19 @@ document.getElementById('search_type').addEventListener('change', () => {
 
 document.getElementById('retrieval_method').addEventListener('change', () => {
     performSearch();
+    const retrievalMethodValue = document.getElementById('retrieval_method').value;
+    const alphaController = document.getElementById('alpha-controller');
+    const rerankMethod = document.getElementById('ranking_method');
+    if (retrievalMethodValue === 'disjunction') {
+        rerankMethod.innerHTML = `<p>RRF</p>`;
+        alphaController.classList.remove('hidden');
+    } else if (retrievalMethodValue === 'tensor') {
+        rerankMethod.innerHTML = `<p>Lexical</p>`;
+        alphaController.classList.add('hidden');
+    } else if (retrievalMethodValue === 'lexical') {
+        rerankMethod.innerHTML = `<p>Tensor</p>`;
+        alphaController.classList.add('hidden');
+    }
 });
 
 document.getElementById('alpha').addEventListener('change', () => {

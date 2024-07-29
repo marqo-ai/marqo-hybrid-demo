@@ -74,7 +74,7 @@ def parse_body(data: dict):
             hybrid_parameters["alpha"] = alpha
             hybrid_parameters["rrfK"] = 60
 
-        if modifiers is not None:
+        if modifiers is not None and retrieval_method == "disjunction":
             hybrid_parameters["scoreModifiersTensor"] = modifiers
             hybrid_parameters["scoreModifiersLexical"] = modifiers
 
