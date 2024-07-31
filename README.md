@@ -34,6 +34,9 @@ wget https://marqo-public-demo-data.s3.amazonaws.com/amazon_products-500k.jsonl 
 
 If you want to experiment with other categories you can make your own dataset.
 
+```bash
+mkdir data_raw
+```
 To do so, download whichever categories you want from the [Amazon Reviews Dataset](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023/tree/main/raw/meta_categories) and place them in the `data_raw` folder.
 
 Then run the following command to create a single cleaned dataset:
