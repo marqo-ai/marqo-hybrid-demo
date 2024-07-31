@@ -11,15 +11,23 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Run Marqo
+
+For this demo we recommend using a GPU. You can start the docker container with GPUs enabled by running the following command:
+
+```bash
+docker run --name marqo --gpus all -p 8882:8882 -e MARQO_MODELS_TO_PRELOAD="[]" marqoai/marqo:latest
+```
+
 # Step 1: Get the Data
 
 ## Use our cleaned dataset (recommended)
-We made a cleaned dataset ready to go which you can use to get started quickly. This dataset contains 20 million products from the following categories: `All_Beauty`, `Amazon Fashion`, `Appliances`, `Baby_Products`, `Beauty_and_Personal_Care`, and `Clothing_Shoes_and_Jewelry`.
+We made a cleaned dataset ready to go which you can use to get started quickly. This dataset contains 500,000 products from the following categories: `All_Beauty`, `Amazon Fashion`, `Appliances`, `Baby_Products`, `Beauty_and_Personal_Care`, and `Clothing_Shoes_and_Jewelry`.
 
 Download the dataset:
 ```bash
 mkdir data
-wget https://marqo-public-demo-data.s3.amazonaws.com/amazon_products.jsonl -o data/amazon_products.jsonl
+wget https://marqo-public-demo-data.s3.amazonaws.com/amazon_products-500k.jsonl -o data/amazon_products.jsonl
 ```
 
 ## Create your own dataset (optional)
@@ -77,7 +85,7 @@ To incorporate a demo of sponsored search into the UI we provide a script to ran
 
 To randomly sponsor products, run the following command:
 ```bash
-python 4.\ 4. randomly_sponsor_items.py
+python 4.\ randomly_sponsor_items.py
 ```
 
 This script uses the partial update API in Marqo to update the sponsored products in real-time without touching the HNSW index.

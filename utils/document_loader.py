@@ -39,6 +39,14 @@ class AmazonDocumentLoader:
         return marqo_document
 
     def _coerce_price(self, price: Union[None, str, int, float]) -> float:
+        """coerces the price to a float, the raw data is quite messy and price appears in a few formats
+
+        Args:
+            price (Union[None, str, int, float]): the price to coerce
+
+        Returns:
+            float: the price as a float
+        """
         if price is None:
             return -1
         elif isinstance(price, str):
@@ -57,7 +65,16 @@ class AmazonDocumentLoader:
 
     def stream_from_disk(
         self, batch_size: int = 256, return_raw: bool = False
-    ) -> Generator[List[Union[dict, Tuple[dict, dict]]], None, None]:
+    ) -> Generator[Union[List[dict], List[Tuple[dict, dict]]], None, None]:
+        """streams the data from disk in a given batch size
+
+        Args:
+            batch_size (int, optional): the batch size to yield from disk. Defaults to 256.
+            return_raw (bool, optional): whether or not to return the raw documents. Defaults to False.
+
+        Yields:
+            Generator[Union[List[dict], List[Tuple[dict, dict]]], None, None]: the batch of documents
+        """
         with open(self.file_path, "r") as f:
             line_batch = []
             for line in f:

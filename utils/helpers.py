@@ -1,4 +1,4 @@
-from typing import List, Literal, Union
+from typing import List, Literal, Union, Tuple
 
 RETRIEVAL_METHOD_TO_RANK = {
     "tensor": "lexical",
@@ -18,6 +18,14 @@ def get_modifiers(
         "desc_price",
     ]
 ) -> List[str]:
+    """converts the request order_by parameter to a list of score modifiers
+
+    Args:
+        order_by (Literal[ None, "asc_average_rating", "desc_average_rating", "asc_rating_number", "desc_rating_number", "asc_price", "desc_price"]): the order_by parameter from the request
+
+    Returns:
+        List[str]: the list of score modifiers
+    """
     if order_by is None:
         return None
 
@@ -33,7 +41,22 @@ def get_modifiers(
     }
 
 
-def parse_body(data: dict):
+def parse_body(
+    data: dict,
+) -> Tuple[
+    str,
+    Literal["tensor", "lexical", "hybrid"],
+    Union[None, List[str]],
+    Union[None, dict],
+]:
+    """parses the request body to extract the query, search type, modifiers and hybrid parameters
+
+    Args:
+        data (dict): the request body
+
+    Returns:
+        Tuple[str, Literal["tensor", "lexical", "hybrid"], Union[None, List[str]], Union[None, dict]]: the query, search type, modifiers and hybrid parameters
+    """
     query = data["query"]
     search_type: Literal["tensor", "lexical", "hybrid"] = data["search_type"]
     retrieval_method: Literal[None, "lexical", "tensor", "disjunction"] = data.get(

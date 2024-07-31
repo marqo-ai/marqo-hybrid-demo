@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from tqdm import tqdm
 from workercontext import parallelise
 from utils.document_loader import AmazonDocumentLoader
+from utils.index_logging import load_indexed_docs, log_indexed_docs
 from threading import Lock
 import argparse
 
@@ -25,23 +26,6 @@ CLIENT_BATCH_SIZE = 16
 N_PROCESSES = 1
 
 
-def load_indexed_docs(log_file: str) -> set:
-    if not os.path.exists(log_file):
-        return set()
-
-    with open(log_file, "r") as f:
-        return set(f.read().splitlines())
-
-
-def log_indexed_docs(response: dict, log_file: str, lock: Lock):
-    with lock:
-        with open(log_file, "a") as f:
-            for resp in response:
-                for item in resp["items"]:
-                    if item["status"] == 200:
-                        f.write(item["_id"] + "\n")
-
-
 def index_batch(batch: List[dict]):
     lock = Lock()
     response = MQ.index(INDEX_NAME).add_documents(
@@ -55,14 +39,15 @@ def index_batch(batch: List[dict]):
 
 def main():
     parser = argparse.ArgumentParser(
-        prog='3. Index_data',
-        description='Indexes amazon products data into Marqo'
+        prog="3. Index_data", description="Indexes amazon products data into Marqo"
     )
-    parser.add_argument('--device', type=str, default='cpu', help='Device that is avaliable to Marqo')
+    parser.add_argument(
+        "--device", type=str, default="cpu", help="Device that is avaliable to Marqo"
+    )
 
     args = parser.parse_args()
 
-    if args.device == 'gpu':
+    if args.device == "gpu":
         global CLIENT_BATCH_SIZE
         CLIENT_BATCH_SIZE = 32
         global N_PROCESSES
