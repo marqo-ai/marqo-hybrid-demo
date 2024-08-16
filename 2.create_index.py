@@ -74,7 +74,6 @@ def main():
         index_settings["numberOfShards"] = os.getenv("NUMBER_OF_SHARDS", 1)
         index_settings["numberOfReplicas"] = os.getenv("NUMBER_OF_REPLICAS", 0)
 
-
     mq.create_index(INDEX_NAME, settings_dict=index_settings)
     print("Index created successfully!")
 

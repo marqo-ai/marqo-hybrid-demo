@@ -79,11 +79,9 @@ async function performSearch() {
     const order_by = document.getElementById('order_by').value || null;
     const alpha = parseFloat(document.getElementById('alpha').value) || 0.5;
     const loadingSpinner = document.getElementById('loading');
-    const searchTimeElement = document.getElementById('search-time');
     const showSponsored = document.getElementById('toggle-sponsored').checked;
 
     loadingSpinner.style.display = 'block';
-    searchTimeElement.innerHTML = '';
 
     const searchResponse = await fetch('/search', {
         method: 'POST',
@@ -98,10 +96,8 @@ async function performSearch() {
     });
 
     const searchData = await searchResponse.json();
-    const searchTime = searchData["processingTimeMs"];
 
     loadingSpinner.style.display = 'none';
-    searchTimeElement.innerHTML = `Search time: ${searchTime}ms`;
 
     if (showSponsored) {
         const sponsoredResponse = await fetch('/sponsored_search', {
