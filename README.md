@@ -117,7 +117,7 @@ The `2.create_index.py` script will automatically use Marqo Cloud if these envir
 import marqo
 import os
 
-mq = marqo.Client("https://api.marqo.ai", os.getenv("MARQO_API_KEY"))
+mq = marqo.Client("https://api.marqo.ai", api_key=os.getenv("MARQO_API_KEY"))
 mq.delete_index(os.getenv("INDEX_NAME", "amazon-example"))
 ```
 
