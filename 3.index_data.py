@@ -20,7 +20,7 @@ INDEX_NAME = os.getenv("INDEX_NAME", "amazon-example")
 MQ = marqo.Client(MARQO_API_URL, api_key=MARQO_API_KEY)
 
 INDEX_LOG_FILE = f"{INDEX_NAME}_indexed_docs.log"
-DISK_STREAM_BATCH_SIZE = 512
+DISK_STREAM_BATCH_SIZE = 32
 CLIENT_BATCH_SIZE = 16
 N_PROCESSES = 1
 
@@ -67,11 +67,18 @@ def main():
         CLIENT_BATCH_SIZE = 32
         global N_PROCESSES
         N_PROCESSES = 6
+        global DISK_STREAM_BATCH_SIZE
+        DISK_STREAM_BATCH_SIZE = 512
 
     data_path = os.path.join("data", "amazon_products.jsonl")
     data_loader = AmazonDocumentLoader(data_path)
 
     done = load_indexed_docs(INDEX_LOG_FILE)
+
+    print("Indexing documents...")
+    print(f"Already indexed: {len(done)}")
+    print(f"Total documents: {len(data_loader)}")
+    print(f"Remaining documents: {len(data_loader) - len(done)}")
 
     for batch in tqdm(
         data_loader.stream_from_disk(batch_size=DISK_STREAM_BATCH_SIZE),

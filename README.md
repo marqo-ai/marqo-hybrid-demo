@@ -11,6 +11,16 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+You can then run Marqo on CPU with:
+```bash
+docker run --name marqo -it -e MARQO_MODELS_TO_PRELOAD="[]" -p 8882:8882 marqoai/marqo:2.11
+```
+Or if you have GPU:
+You can then run Marqo on CPU with:
+```bash
+docker run --gpus all --name marqo -it -e MARQO_MODELS_TO_PRELOAD="[]" -p 8882:8882 marqoai/marqo:2.11
+```
+
 # Step 1: Get the Data
 
 ## Use our cleaned dataset (recommended)
@@ -19,7 +29,7 @@ We made a cleaned dataset ready to go which you can use to get started quickly. 
 Download the dataset:
 ```bash
 mkdir data
-wget https://marqo-public-demo-data.s3.amazonaws.com/amazon_products.jsonl -o data/amazon_products.jsonl
+wget https://marqo-public-demo-data.s3.amazonaws.com/amazon_products-500k.jsonl -O data/amazon_products.jsonl -q --show-progress
 ```
 
 ## Create your own dataset (optional)
@@ -31,7 +41,7 @@ To do so, download whichever categories you want from the [Amazon Reviews Datase
 Then run the following command to create a single cleaned dataset:
 
 ```bash
-python 1.\ prepare_data.py
+python 1.prepare_data.py
 ```
 
 # Step 2: Create an Index
@@ -41,7 +51,7 @@ We will use a structured index for this demo, you can refer to the script `2. cr
 To create the index, run the following command:
 
 ```bash
-python 2.\ create_index.py
+python 2.create_index.py
 ```
 
 In this index we use the `bfloat16` data type to save on space, this comes at a small cost to search latency.
@@ -52,7 +62,7 @@ We highly recommend using a machine with a GPU for indexing, CPU will be very sl
 
 To run indexing you can use the following command, if you have a GPU you can use the `--device "gpu"` flag to parallelize the indexing process:
 ```bash
-python 3.\ index_data.py --device "cpu"
+python 3.index_data.py --device "cpu"
 ```
 
 If you see the script printing out errors like the following:
@@ -77,7 +87,7 @@ To incorporate a demo of sponsored search into the UI we provide a script to ran
 
 To randomly sponsor products, run the following command:
 ```bash
-python 4.\ 4. randomly_sponsor_items.py
+python 4.randomly_sponsor_items.py
 ```
 
 This script uses the partial update API in Marqo to update the sponsored products in real-time without touching the HNSW index.
