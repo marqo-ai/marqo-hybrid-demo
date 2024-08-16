@@ -6,9 +6,6 @@ from utils.helpers import RETRIEVAL_METHOD_TO_RANK, get_modifiers, parse_body
 from utils.auction import auction_spots_with_score
 from dotenv import load_dotenv
 
-
-from typing import Literal, List, Union
-
 app = flask.Flask(__name__)
 CORS(app)
 
