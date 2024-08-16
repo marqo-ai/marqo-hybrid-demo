@@ -2,6 +2,15 @@ from typing import List
 
 
 def auction_spots_with_score(results: List[dict], n_spots: int) -> List[dict]:
+    """Runs an auction for sponsored search results, incorporates both the matching score and the bid amount to determine the final rank.
+
+    Args:
+        results (List[dict]): search results from Marqo
+        n_spots (int): the number of sponsored spots that are available
+
+    Returns:
+        List[dict]: the final search results with the price to pay for each sponsored spot
+    """
     for res in results:
         res["rank_score"] = res["bid_amount"] * res["_score"]
 

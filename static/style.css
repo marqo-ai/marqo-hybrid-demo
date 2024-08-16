@@ -11,7 +11,7 @@ body {
 header {
     background-color: #4CAF50;
     width: 100%;
-    padding: 0.75em 0;
+    padding: 0.1em 0;
     text-align: center;
     color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -37,7 +37,8 @@ main {
     margin-top: 0;
 }
 
-.sidebar select, .sidebar input {
+.sidebar select,
+.sidebar input {
     width: 100%;
     padding: 0.5em;
     margin-bottom: 1em;
@@ -91,8 +92,13 @@ main {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 #search-time {
@@ -116,14 +122,16 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 300px; /* Adjusted height */
+    height: 300px;
+    /* Adjusted height */
 }
 
 .result-item img {
     max-width: 100%;
     margin-bottom: 1em;
     border-radius: 5px;
-    height: 150px; /* Adjusted height */
+    height: 150px;
+    /* Adjusted height */
     object-fit: cover;
 }
 
@@ -131,7 +139,8 @@ main {
     margin: 0.5em 0;
     font-size: 1em;
     text-align: center;
-    max-height: 3em; /* limit title to 3 lines */
+    max-height: 3em;
+    /* limit title to 3 lines */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

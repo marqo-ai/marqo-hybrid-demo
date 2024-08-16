@@ -67,6 +67,14 @@ def main():
         "tensorFields": ["multimodal_image_title"],
     }
 
+    if MARQO_API_KEY is not None:
+        index_settings["inferenceType"] = os.getenv("INFERENCE_TYPE", "marqo.GPU")
+        index_settings["numberOfInferences"] = os.getenv("NUMBER_OF_INFERENCES", 1)
+        index_settings["storageClass"] = os.getenv("STORAGE_CLASS", "marqo.basic")
+        index_settings["numberOfShards"] = os.getenv("NUMBER_OF_SHARDS", 1)
+        index_settings["numberOfReplicas"] = os.getenv("NUMBER_OF_REPLICAS", 0)
+
+
     mq.create_index(INDEX_NAME, settings_dict=index_settings)
     print("Index created successfully!")
 
