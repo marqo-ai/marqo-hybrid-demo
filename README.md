@@ -1,6 +1,8 @@
-# Hybrid E-Commerce Search with Marqo
+# Hybrid Ecommerce Search with Marqo
 
-In this repo we provide a basic implementation for e-commerce product search with Marqo using hybrid search and real e-commerce data from Amazon.
+In this repo we provide a basic implementation for ecommerce product search with [Marqo](https://www.marqo.ai/) using hybrid search and real ecommerce data from Amazon.
+
+The full walkthrough article can be found [here](https://marqo.ai/blog/build-a-multimodal-hybrid-search-system).
 
 # Setup
 To set up your environment, you can use the following commands:
@@ -105,11 +107,12 @@ This script uses the partial update API in Marqo to update the sponsored product
 
 # Running with Marqo Cloud
 
-To run this demo on Marqo Cloud simply set the following environment variables:
+To run this demo on [Marqo Cloud](https://cloud.marqo.ai) simply set the following environment variables:
 ```bash
 export MARQO_API_KEY="your_api_key"
 export MARQO_API_URL="https://api.marqo.ai"
 ```
+For information on how to retrieve your API key, see [this article](https://www.marqo.ai/blog/finding-my-marqo-api-key).
 
 The `2.create_index.py` script will automatically use Marqo Cloud if these environment variables are set and will create an index with GPU inference and a basic storage shard. This index will cost $1.0310 per hour. When you are done with the index you can delete it with the following code:
 
