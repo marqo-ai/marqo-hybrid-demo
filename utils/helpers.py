@@ -82,6 +82,11 @@ def parse_body(
 
     alpha: float = data.get("alpha", 0.5)
 
+    if alpha > 1:
+        alpha = 1
+    elif alpha < 0:
+        alpha = 0
+
     searchable_attributes = None
     if search_type != "tensor":
         searchable_attributes = lexical_searchable_attributes
