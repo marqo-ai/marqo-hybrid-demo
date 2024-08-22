@@ -22,7 +22,6 @@ You can then run Marqo on CPU with:
 docker run --name marqo -it -e MARQO_MODELS_TO_PRELOAD="[]" -p 8882:8882 marqoai/marqo:2.11
 ```
 Or if you have GPU:
-You can then run Marqo on CPU with:
 ```bash
 docker run --gpus all --name marqo -it -e MARQO_MODELS_TO_PRELOAD="[]" -p 8882:8882 marqoai/marqo:2.11
 ```
