@@ -38,7 +38,6 @@ def number_of_documents():
 def search():
     data = flask.request.json
     query, search_type, modifiers, hybrid_parameters = parse_body(data)
-
     results = MQ.index(INDEX_NAME).search(
         q=query,
         search_method=search_type,
