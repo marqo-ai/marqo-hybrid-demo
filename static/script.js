@@ -171,5 +171,10 @@ function createResultItem(result, isSponsored = false) {
     return resultItem;
 }
 
+function validateAlphaInput(input) {
+    if (input.value < 0) input.value = 0;
+    if (input.value > 1) input.value = 1;
+}
+
 // Initial load
 getNumberOfDocuments();
