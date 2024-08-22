@@ -80,7 +80,8 @@ def parse_body(
 
     modifiers = get_modifiers(order_by)
     alpha: float = data.get("alpha", 0.5)
-
+    if alpha is None:
+        alpha = 0.5
     if alpha > 1:
         alpha = 1
     elif alpha < 0:
