@@ -77,7 +77,10 @@ async function performSearch() {
     const search_type = document.getElementById('search_type').value;
     const retrieval_method = document.getElementById('retrieval_method').value || null;
     const order_by = document.getElementById('order_by').value || null;
-    const alpha = parseFloat(document.getElementById('alpha').value) || 0.5;
+    let alpha = parseFloat(document.getElementById('alpha').value);
+    if (alpha === undefined || alpha === null) {
+        alpha = 0.5;
+    }
     const loadingSpinner = document.getElementById('loading');
     const showSponsored = document.getElementById('toggle-sponsored').checked;
 
