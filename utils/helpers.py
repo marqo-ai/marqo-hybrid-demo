@@ -79,7 +79,6 @@ def parse_body(
     )
 
     modifiers = get_modifiers(order_by)
-    print(data["alpha"])
     alpha: float = data.get("alpha", 0.5)
 
     if alpha > 1:
